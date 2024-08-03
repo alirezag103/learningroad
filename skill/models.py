@@ -8,13 +8,17 @@ class SkillCategory(models.Model):
     # shall we set primary_key=True for title?
     title = models.CharField(max_length=255, unique=True)
     parent_category = models.ForeignKey("self", null=True, on_delete=models.PROTECT, related_name='+')
+    description = models.CharField(max_length=255)
 
 
 class Skill(models.Model):
     # id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     title = models.CharField(max_length=255)
     field = models.CharField(max_length=255)
-    description = models.CharField(max_length=1000)
+    description = models.CharField(max_length=1000, null=True)
+
+    def __str__(self) -> str:
+        return f"{self.title}"
 
     class Meta:
         constraints = [
