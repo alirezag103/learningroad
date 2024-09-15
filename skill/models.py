@@ -45,5 +45,15 @@ class Prerequisite(models.Model):
             models.UniqueConstraint(fields=['skill', 'requisite',], name='unique_skill_prerequisite')
         ]
 
+class SkillSet(models.Model):
+    # id = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
+    title = models.CharField(max_length=255)
+    field = models.CharField(max_length=255)
+
+
+class SkillSetContent(models.Model):
+    skill_set = models.ForeignKey(SkillSet, on_delete=models.CASCADE, related_name='+')
+    skill = models.ForeignKey(Skill, on_delete=models.CASCADE, related_name='+')
+
 
 
